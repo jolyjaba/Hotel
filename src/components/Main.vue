@@ -1,31 +1,34 @@
 <template>
-	<div class="main">
-		<div class="main__background-image">
-			<img src="../assets/images/background.png" alt="background" />
-		</div>
-		<Form />
-	</div>
+  <div class="main">
+    <img
+      class="main__background-image"
+      src="../assets/images/background.png"
+      alt="background"
+    />
+    <Form />
+  </div>
 </template>
 
 <script>
-import Form from './Form';
+import Form from "./Form";
 
 export default {
-	components: { Form },
+  components: { Form }
 };
 </script>
 
 <style lang="scss">
 .main {
-	&__background-image {
-		max-height: 684px;
-		overflow: hidden;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		& img {
-			width: 100%;
-		}
-	}
+  overflow: hidden;
+  position: relative;
+  height: 684px;
+  &__background-image {
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 100vh;
+  }
 }
 </style>
