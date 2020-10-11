@@ -1,8 +1,8 @@
 <template>
   <div class="form">
-    <title class="form__title">Регистрация аккаунта</title>
-    <input type="text" class="form__name" placeholder="Имя" />
-    <input type="text" class="form__surname" placeholder="Фамилия" />
+    <p class="form__title">Регистрация аккаунта</p>
+    <TextField type="text" placeholder="Имя" />
+    <TextField type="text" placeholder="Фамилия" />
     <div class="options">
       <div class="option">
         <div class="radio-button">
@@ -27,11 +27,11 @@
         </div>
       </div>
     </div>
-    <title class="form__sub-title">дата рождения</title>
-    <input type="text" class="form__birth" placeholder="ДД.ММ.ГГГГ" />
-    <title class="form__sub-title">данные для входа в сервис</title>
-    <input type="email" class="form__email" placeholder="Email" />
-    <input type="password" class="form__password" placeholder="Пароль" />
+    <p class="form__sub-title">дата рождения</p>
+    <TextField type="text" placeHolder="ДД.ММ.ГГГГ" />
+    <p class="form__sub-title">данные для входа в сервис</p>
+    <TextField type="email" placeHolder="Email" />
+    <TextField type="password" placeHolder="Пароль" />
     <div class="form__optional">
       <div class="toggle">
         <input type="checkbox" name="toggle" id="toggle" />
@@ -43,55 +43,30 @@
       </div>
       <label for="toggle">Получать спецпредложения</label>
     </div>
-    <div class="button button--filled button--filled-pay">
-      <p>перейти к оплате</p>
-    </div>
-    <div class="form__sign-in">
+    <Button text="перейти к оплате" type="filled directed" />
+    <div class="form__footer">
       <p>Уже есть аккаунт на Toxin</p>
-      <div class="button button--outlined button--outlined-sign-in">
-        <p>войти</p>
-      </div>
+      <Button
+        @click="$router.push('/login')"
+        text="войти"
+        type="outlined larger"
+      />
     </div>
   </div>
 </template>
 
-<script>
-export default {};
+<script lang="ts">
+import { defineComponent } from "vue";
+import TextField from "@/components/TextField.vue";
+import Button from "@/components/Button.vue";
+
+export default defineComponent({
+  components: { TextField, Button }
+});
 </script>
 
 <style lang="scss">
-@import "./Fonts_Colors";
-
-.button {
-  &--outlined {
-    &-sign-in {
-      padding: 12px;
-      height: 44px;
-      width: 99px;
-    }
-  }
-  &--filled {
-    &-pay {
-      width: 320px;
-      height: 44px;
-      margin: 24px 0;
-      padding: 12px;
-      &::after {
-        content: "";
-        background: url("../assets/svg/arrow_forward.svg") no-repeat center;
-        position: absolute;
-        width: 44px;
-        height: 44px;
-        right: -2px;
-        top: -2px;
-      }
-    }
-  }
-}
-
-%Transition {
-  transition: 0.2s cubic-bezier(0.55, 0.085, 0.68, 0.53);
-}
+@import "@/components/Fonts_Colors";
 
 %GradientTransition {
   background: linear-gradient(180deg, #bc9cff 0%, #8ba4f9 100%);
@@ -183,6 +158,7 @@ export default {};
     margin-right: 20px;
   }
   label {
+    @extend %Transition;
     &:last-of-type {
       opacity: 0.75;
     }
@@ -194,6 +170,7 @@ export default {};
   display: flex;
   align-items: center;
   label {
+    cursor: pointer;
     &:first-of-type {
       margin-right: 10px;
     }
@@ -230,7 +207,7 @@ export default {};
     display: none;
     &:not(:checked) ~ label {
       #{$toggle}__button {
-        transform: translateX(0px) scale(1);
+        transform: translateX(0px);
       }
       #{$toggle}__button,
       #{$toggle}__border {
@@ -239,8 +216,9 @@ export default {};
     }
   }
   label {
+    cursor: pointer;
     #{$toggle}__button {
-      transform: translateX(20px) scale(1.2);
+      transform: translateX(20px);
       @extend %DotStyle;
     }
     #{$toggle}__border {
@@ -248,65 +226,6 @@ export default {};
       height: 20px;
       @extend %BorderStyle;
     }
-  }
-}
-
-input[type="text"],
-input[type="email"],
-input[type="password"] {
-  width: 100%;
-  height: 44px;
-  padding: 13px 15px;
-  border: 1px solid $darkShade {
-    radius: 4px;
-  }
-  opacity: 0.25;
-  margin: 5px 0;
-}
-
-.form {
-  position: absolute;
-  background: #ffffff;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  padding: 40px 30px 30px;
-  max-width: 380px;
-  border: 1px solid rgba(0, 0, 0, 0.12);
-  box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.2);
-  border-radius: 4px;
-  &__title {
-    @extend %H1;
-    color: $darkShade;
-    text-align: left;
-    margin-bottom: 15px;
-  }
-  &__sub-title {
-    margin: 15px 0 0;
-    @extend %H3;
-    text-align: left;
-    text-transform: uppercase;
-    clear: both;
-  }
-  &__optional {
-    display: flex;
-    align-items: center;
-    margin: 5px 0;
-    label {
-      color: $darkShade;
-      opacity: 0.75;
-    }
-  }
-  &__button-pay {
-    margin: 15px 0;
-    img {
-      display: block;
-    }
-  }
-  &__sign-in {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
   }
 }
 </style>

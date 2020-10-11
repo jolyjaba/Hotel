@@ -1,5 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Quicksand:wght@400;700&display=swap");
 
+$green: #6fcf97;
+$purple: #bc9cff;
+$darkShade: #1f2041;
+
 %Quicksand {
   font: {
     family: "Quicksand", sans-serif;
@@ -31,6 +35,6 @@
   line-height: 15px;
 }
 
-$green: #6fcf97;
-$purple: #bc9cff;
-$darkShade: #1f2041;
+%Transition {
+  transition: 0.1s cubic-bezier(0.55, 0.085, 0.68, 0.53);
+}

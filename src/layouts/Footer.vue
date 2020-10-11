@@ -4,10 +4,10 @@
       <div class="footer">
         <div class="footer__description">
           <div class="logo">
-            <img class="icon" src="../assets/svg/logo.svg" alt="logo" />
+            <img class="icon" src="@/assets/svg/logo.svg" alt="logo" />
             <img
               class="text"
-              src="../assets/svg/logo_text.svg"
+              src="@/assets/svg/logo_text.svg"
               alt="logo_text"
             />
           </div>
@@ -41,9 +41,7 @@
           <div class="link">
             <p>Получайте специальные предложения и новости сервиса</p>
           </div>
-          <div class="field">
-            <input type="email" name="email" id="email" placeholder="Email" />
-          </div>
+          <SubscriptionTextField />
         </div>
       </div>
     </div>
@@ -51,40 +49,26 @@
       <div class="footer__copyright">
         <p>Copyright © 2018 Toxin отель. Все права зачищены.</p>
         <div class="footer__socials">
-          <img src="../assets/svg/twitter.svg" alt="Twitter Icon" />
-          <img src="../assets/svg/facebook.svg" alt="Facebook Icon" />
-          <img src="../assets/svg/instagram.svg" alt="Instagram Icon" />
+          <img src="@/assets/svg/twitter.svg" alt="Twitter Icon" />
+          <img src="@/assets/svg/facebook.svg" alt="Facebook Icon" />
+          <img src="@/assets/svg/instagram.svg" alt="Instagram Icon" />
         </div>
       </div>
     </div>
   </div>
 </template>
 
-<script>
-export default {};
+<script lang="ts">
+import { defineComponent } from "vue";
+import SubscriptionTextField from "@/components/SubscriptionTextField.vue";
+
+export default defineComponent({
+  components: { SubscriptionTextField }
+});
 </script>
 
 <style lang="scss">
-@import "./Fonts_Colors";
-
-.field {
-  margin: 5px 0;
-  margin-top: 20px;
-  position: relative;
-  &::before {
-    content: "";
-    z-index: 1;
-    position: absolute;
-    width: 44px;
-    height: 44px;
-    top: 0;
-    right: 0;
-    background: url("../assets/svg/arrow_forward_filled.svg") no-repeat center;
-  }
-  input {
-    margin: 0;
-  }
-}
+@import "@/components/Fonts_Colors";
 
 .footer {
   display: flex;
@@ -109,6 +93,13 @@ export default {};
   > div:first-of-type,
   > div:last-of-type {
     max-width: 260px;
+  }
+  > div {
+    margin: 0 5px;
+  }
+  &__wrapper {
+    height: 443px;
+    box-shadow: 0px 1px 0px rgba(31, 32, 65, 0.1);
   }
   &__inc {
     opacity: 0.75;
@@ -138,15 +129,12 @@ export default {};
   &__socials {
     display: flex;
     img {
+      cursor: pointer;
       display: block;
       &:not(:last-of-type) {
         margin-right: 20px;
       }
     }
-  }
-  &__wrapper {
-    height: 443px;
-    box-shadow: 0px 1px 0px rgba(31, 32, 65, 0.1);
   }
 }
 </style>

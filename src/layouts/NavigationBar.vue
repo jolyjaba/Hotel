@@ -2,20 +2,20 @@
   <div class="navigation-bar__wrapper">
     <div class="navigation-bar">
       <div class="navigation-bar__left-side">
-        <div class="logo">
-          <img class="icon" src="../assets/svg/logo.svg" alt="logo" />
-          <img class="text" src="../assets/svg/logo_text.svg" alt="logo_text" />
+        <div @click="$router.push('/')" class="logo">
+          <img class="icon" src="@/assets/svg/logo.svg" alt="logo" />
+          <img class="text" src="@/assets/svg/logo_text.svg" alt="logo_text" />
         </div>
       </div>
       <div class="navigation-bar__right-side">
         <div class="navigation-bar__group">
-          <div class="link">
+          <div class="link active">
             <p>О нас</p>
           </div>
           <div class="link link--drop-down">
             <p>Услуги</p>
             <div class="drop-down">
-              <img src="../assets/svg/dropDown.svg" alt="dropdown" />
+              <img src="@/assets/svg/dropDown.svg" alt="dropdown" />
             </div>
           </div>
           <div class="link"><p>Вакансии</p></div>
@@ -23,27 +23,39 @@
           <div class="link link--drop-down">
             <p>Соглашения</p>
             <div class="drop-down">
-              <img src="../assets/svg/dropDown.svg" alt="dropdown" />
+              <img src="@/assets/svg/dropDown.svg" alt="dropdown" />
             </div>
           </div>
         </div>
-        <div class="button button--outlined">
-          <p>войти</p>
-        </div>
-        <div class="button button--filled">
-          <p>зарегистрироваться</p>
-        </div>
+        <Button @click="$router.push('/login')" text="войти" type="outlined" />
+        <Button
+          @click="$router.push('/registration')"
+          text="зарегистрироваться"
+          type="filled"
+        />
       </div>
     </div>
   </div>
 </template>
 
-<script>
-export default {};
+<script lang="ts">
+import { defineComponent } from "vue";
+import Button from "@/components/Button.vue";
+
+export default defineComponent({
+  components: { Button }
+});
 </script>
 
 <style lang="scss">
-@import "./Fonts_Colors";
+@import "@/components/Fonts_Colors";
+
+.logo,
+.link > p,
+.button,
+.drop-down > img {
+  cursor: pointer;
+}
 
 .logo {
   display: flex;
@@ -53,18 +65,28 @@ export default {};
 }
 
 .link {
+  &.active {
+    p {
+      font-weight: 700;
+      opacity: 0.75;
+    }
+  }
   p {
+    transition: opacity 0.1s cubic-bezier(0.55, 0.085, 0.68, 0.53);
     color: $darkShade;
     opacity: 0.5;
+    &:hover {
+      opacity: 0.75;
+    }
   }
   &--drop-down {
     display: flex;
     .drop-down {
       width: 24px;
+      img {
+        pointer-events: none;
+      }
     }
-  }
-  &:not(:last-of-type) {
-    margin-right: 20px;
   }
 }
 
@@ -88,49 +110,9 @@ export default {};
   }
   &__group {
     display: flex;
+    justify-content: space-between;
+    width: 446px;
     margin: 0 20px;
-  }
-}
-
-.button {
-  padding: 7px 18px;
-  &:not(:last-of-type) {
-    margin-right: 20px;
-  }
-  p {
-    @extend %H3;
-    text-transform: uppercase;
-  }
-  &--outlined {
-    width: 87px;
-    background: #fff;
-    color: $purple;
-  }
-  &--filled {
-    width: 196px;
-    color: #fff;
-  }
-  &--filled,
-  &--outlined {
-    height: 34px;
-    position: relative;
-    $border: 2px;
-    background-clip: padding-box;
-    border: solid $border transparent {
-      radius: 2em;
-    }
-    &::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      z-index: -1;
-      margin: -$border;
-      border-radius: inherit;
-      background: linear-gradient(180deg, #bc9cff 0%, #8ba4f9 100%);
-    }
   }
 }
 </style>

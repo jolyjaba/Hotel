@@ -5,14 +5,14 @@
       src="@/assets/images/registration_background.jpg"
       alt="background"
     />
-    <RegisterForm />
+    <LoginForm />
   </div>
 </template>
 
 <script>
-import RegisterForm from "@/components/RegisterForm";
+import LoginForm from "@/components/LoginForm";
 
 export default {
-  components: { RegisterForm }
+  components: { LoginForm }
 };
 </script>
